@@ -1,7 +1,7 @@
-package dao;
+package com.erick.dao;
 
-import model.Task;
-import util.ConnectionFactory;
+import com.erick.model.Task;
+import com.erick.util.ConnectionFactory;
 
 import java.util.List;
 import java.util.ArrayList;
@@ -12,7 +12,7 @@ import java.sql.PreparedStatement;
 import java.sql.Statement;
 import java.sql.ResultSet;
 
-public class TaskDaoImpl implements TaskDao{
+public class TaskDaoImpl implements TaskDao {
 
     private final Connection connection;
 

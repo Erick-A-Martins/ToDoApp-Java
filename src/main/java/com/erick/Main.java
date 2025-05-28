@@ -1,10 +1,12 @@
-import dao.TaskDao;
-import dao.TaskDaoImpl;
+package com.erick;
+
+import com.erick.dao.TaskDao;
+import com.erick.dao.TaskDaoImpl;
 
 import java.sql.SQLException;
 import java.util.List;
 
-import model.Task;
+import com.erick.model.Task;
 
 
 public class Main {

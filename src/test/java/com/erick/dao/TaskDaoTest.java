@@ -1,6 +1,8 @@
-package dao;
+package com.erick.dao;
 
-import model.Task;
+import com.erick.dao.TaskDao;
+import com.erick.dao.TaskDaoImpl;
+import com.erick.model.Task;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

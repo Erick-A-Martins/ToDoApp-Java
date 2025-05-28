@@ -1,6 +1,6 @@
-package dao;
+package com.erick.dao;
 
-import model.Task;
+import com.erick.model.Task;
 import java.util.List;
 
 import java.sql.SQLException;
