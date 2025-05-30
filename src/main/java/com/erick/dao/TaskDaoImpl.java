@@ -67,17 +67,19 @@ public class TaskDaoImpl implements TaskDao {
     }
 
     @Override
-    public void removeTaskById(Integer id) {
+    public boolean removeTaskById(Integer id) {
         String sql = "DELETE FROM tasks WHERE id = ?";
         try(Connection conn = ConnectionFactory.getConnection();
             PreparedStatement stmt = conn.prepareStatement(sql)) {
 
             stmt.setInt(1, id);
-            stmt.executeUpdate();
+            int rowsAffected = stmt.executeUpdate();
+            return rowsAffected > 0;
 
         } catch (SQLException e) {
             e.printStackTrace();
         }
+        return false;
     }
 
     @Override

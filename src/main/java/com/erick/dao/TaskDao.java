@@ -9,7 +9,9 @@ public interface TaskDao {
 
     Integer addTask(Task task) throws SQLException;
 
-    void removeTaskById(Integer id) throws SQLException;
+    boolean removeTaskById(Integer id) throws SQLException;
+
+    //boolean updateTask(Task task) throws SQLException;
 
     Task getTaskById(Integer id) throws SQLException;
 

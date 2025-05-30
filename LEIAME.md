@@ -27,7 +27,7 @@ Links úteis para configuração:
 O projeto será desenvolvido em fases incrementais para melhor aprendizado:
 
 ### Fase 1: Fundamentos Java e JDBC
-- Criação das classes básicas (Task, User)
+- Criação das classes básicas (Task)
 - Implementação do CRUD usando JDBC puro
 - Conexão com banco de dados H2 (em memória para desenvolvimento)
 - Tratamento de exceções
@@ -38,7 +38,6 @@ Vocè precisa de alguma forma, cria uma conexão, criar tabelas e manipuladas.
 
 Links:
 [O que é uma DAO?](https://duckduckgo.com/?q=O+que+%C3%A9+uma+dao+em+java%3F&ia=chat&bang=true&atb=v478-1)
-
 
 ### Fase 2: Transformar em projeto maven
 - Criar um repositorio no github (pessoal)
@@ -51,18 +50,22 @@ Links:
     - Execução dos testes
     - Utilizar java 21
 
-### Fase 3: Servlets e Web
-- **DESAFIO 1**: Configurar o Jetty Server programaticamente no método main
-- Criação de Servlets básicos
-- Implementação de endpoints REST
-- Manipulação de requisições HTTP
-- Respostas em JSON
+### Fase 3: Servlets e Web (listar)
+- Configurar o Jetty Server programaticamente no método main
+- Criar uma Servlet que:
+  - Liste em HTML as tasks
 
-### Fase 4: Front-end Básico
-- HTML simples
-- JavaScript puro para chamadas AJAX
-- Manipulação do DOM
-- Integração com backend
+### Fase 4: Servlets e Web (criar)
+- Criar/Atualizar a Servlet para que:
+  - Permita adicionar uma nova task
+
+### Fase 5: Servlets e Web (criar)
+- Criar/Atualizar a Servlet para que:
+  - Permita deletar nova task criada
+
+### Fase 6: Servlets e Web (criar)
+- Criar/Atualizar a Servlet para que:
+  - Permita editar uma task criada
 
 ## Tecnologias Utilizadas
 - Java 21

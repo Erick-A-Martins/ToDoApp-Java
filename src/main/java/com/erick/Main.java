@@ -1,32 +1,28 @@
 package com.erick;
 
-import com.erick.dao.TaskDao;
-import com.erick.dao.TaskDaoImpl;
+import com.erick.servlet.CreateTaskServlet;
+import com.erick.servlet.ListTasksServlet;
 
-import java.sql.SQLException;
-import java.util.List;
-
-import com.erick.model.Task;
-
+import org.eclipse.jetty.server.Server;
+import org.eclipse.jetty.servlet.ServletContextHandler;
+import org.eclipse.jetty.servlet.ServletHolder;
 
 public class Main {
-    public static void main(String[] args) throws SQLException {
+    public static void main(String[] args) throws Exception{
+        Server server = new Server(8080);
+        // Define o ambiente/caminho raiz do servidor
+        ServletContextHandler context = new ServletContextHandler(ServletContextHandler.SESSIONS);
+        context.setContextPath("/");
 
-        try {
-            TaskDao taskDao = new TaskDaoImpl();
+        // Adiciona uma servlets ao caminho raiz do servidor (context)
+        context.addServlet(new ServletHolder(new ListTasksServlet()), "/tasks");
+        context.addServlet(new ServletHolder(new CreateTaskServlet()), "/create");
 
-            Task task = new Task(null, "Estudar JDBC", "Revisar conexão e CRUD", false);
-            Integer id = taskDao.addTask(task);
-            System.out.println("Task inserida com o ID: " + id);
+        server.setHandler(context);
 
-            List<Task> tasks = taskDao.listAllTasks();
-            for(Task t : tasks) {
-                System.out.println(t);
-            }
+        server.start();
+        System.out.println("Servidor rodando em http://localhost:8080");
+        server.join();
 
-        } catch (SQLException e) {
-            System.out.println("Erro ao conectar");
-            e.printStackTrace();
-        }
     }
 }
