@@ -34,14 +34,14 @@ public class ListTasksServlet extends HttpServlet {
 
         // estruturando html
         out.println("<!DOCTYPE html>");
-        out.println("<html> <head> <title>To Do List</title> </head> <body>");
-        out.println("<h1>Lista de Tarefas</h1>");
+        out.println("<html> <head> <title>To Do List</title> </head> <body style='display: flex; flex-direction: column; align-items: center;'>");
+        out.println("<div style='display:flex; align-items: center; gap: 2rem;'> <h1 style='font-family: monospace;'>Lista de Tarefas</h1> <a href='/create'><button style='font-family: monospace; cursor: pointer; font-size: 1rem; color: white; background-color: #007D93; border: unset;'>+</button></a></div>");
         out.println("<ul>");
 
 
 
         for(Task task : tasks) {
-            out.printf("<li><strong> %s </strong>: %s [%s]  &nbsp;&nbsp;<button>x</button></li>",
+            out.printf("<li style='font-family: monospace; font-size: 1rem;'><strong> %s </strong>: %s [%s]  &nbsp;&nbsp;<button>x</button></li>",
                     task.title(),
                     task.description(),
                     task.completed() ? "Concluída" : "Pendente");
