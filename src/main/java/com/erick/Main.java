@@ -1,6 +1,7 @@
 package com.erick;
 
 import com.erick.servlet.CreateTaskServlet;
+import com.erick.servlet.DeleteTaskServlet;
 import com.erick.servlet.ListTasksServlet;
 
 import org.eclipse.jetty.server.Server;
@@ -17,6 +18,7 @@ public class Main {
         // Adiciona uma servlets ao caminho raiz do servidor (context)
         context.addServlet(new ServletHolder(new ListTasksServlet()), "/tasks");
         context.addServlet(new ServletHolder(new CreateTaskServlet()), "/create");
+        context.addServlet(new ServletHolder(new DeleteTaskServlet()), "/delete");
 
         server.setHandler(context);
 

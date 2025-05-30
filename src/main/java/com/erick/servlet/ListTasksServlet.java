@@ -41,10 +41,14 @@ public class ListTasksServlet extends HttpServlet {
 
 
         for(Task task : tasks) {
-            out.printf("<li style='font-family: monospace; font-size: 1rem;'><strong> %s </strong>: %s [%s]  &nbsp;&nbsp;<button>x</button></li>",
+            out.printf("<li style='font-family: monospace; font-size: 1rem; display: flex; align-items: center'><strong> %s </strong>: %s [%s]",
                     task.title(),
                     task.description(),
                     task.completed() ? "Concluída" : "Pendente");
+            out.println("<form method='post' action='/delete' style='display: inline; margin-left: auto;'>");
+            out.printf("<input type='hidden' name='id' value='%d'/>", task.id());
+            out.println("<button type='submit' style='font-family: monospace; cursor: pointer; font-size: 1rem; color: #007D93; background-color: unset; border: unset;'>✖</button>");
+            out.println("</form></li>");
         }
 
         out.println("</ul>");
