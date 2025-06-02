@@ -67,10 +67,24 @@ Links:
 - Criar/Atualizar a Servlet para que:
   - Permita editar uma task criada
 
+### Fase 7: MiniServlet MVC
+- Essa servlet deve controlar para onde a request será encaminhada,
+  ex: o /listar, deve encaminhar para ListarTaskPage.java, sendo que esta implementa a interface Page.
+- Caso não exista nenhuma correspondência, retornar uma tela de 404 (não encontrado)
+``` java
+public interface Page {
+    String render(Map<String, Object> parameters);
+}
+```
+
+### Fase 8: Autenticação utilizando Filter
+- Implementar um filtro que garanta que o usuário esteja logado, caso contrario, solicitar autorização via BASIC
+- teste:teste
+
 ## Tecnologias Utilizadas
 - Java 21
 - JDBC
 - H2 Database (em memória)
 - Servlet API
 - Eclipse Jetty
-- HTML/CSS/JavaScript (vanilla)
+- HTML/CSS
