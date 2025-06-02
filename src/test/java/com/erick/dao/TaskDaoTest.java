@@ -55,4 +55,20 @@ public class TaskDaoTest {
         Assertions.assertTrue(taskFromDb.completed());
     }
 
+    @Test
+    void shouldUpdateTask() throws SQLException {
+        var task = new Task(null, "atualizar", "descricao", false);
+        var id = taskDao.addTask(task);
+
+        var updated = new Task(id, "atualizada", "alterado", true);
+        boolean updatedTask = taskDao.updateTask(updated);
+
+        Assertions.assertTrue(updatedTask);
+
+        var taskFromDb = taskDao.getTaskById(id);
+        Assertions.assertEquals("atualizada", taskFromDb.title());
+        Assertions.assertEquals("alterado", taskFromDb.description());
+        Assertions.assertTrue(taskFromDb.completed());
+    }
+
 }

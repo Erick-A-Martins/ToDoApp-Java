@@ -34,15 +34,19 @@ public class ListTasksServlet extends HttpServlet {
 
         // estruturando html
         out.println("<!DOCTYPE html>");
-        out.println("<html> <head> <title>To Do List</title> </head> <body style='display: flex; flex-direction: column; align-items: center;'>");
+        out.println("<html lang='pt-br'> <head> <title>To Do List</title> </head> <body style='display: flex; flex-direction: column; align-items: center;'>");
         out.println("<div style='display:flex; align-items: center; gap: 2rem;'> <h1 style='font-family: monospace;'>Lista de Tarefas</h1> <a href='/create'><button style='font-family: monospace; cursor: pointer; font-size: 1rem; color: white; background-color: #007D93; border: unset;'>+</button></a></div>");
-        out.println("<ul>");
+        out.println("<ul style=' padding: 0;'>");
 
 
 
-        for(Task task : tasks) {
-            out.printf("<li style='font-family: monospace; font-size: 1rem; display: flex; align-items: center'><strong> %s </strong>: %s [%s]",
-                    task.title(),
+        for(Task task : tasks) {;
+            out.println("<li style='font-family: monospace; font-size: 1rem; display: flex; align-items: center'>");
+            out.println("<form method='get' action='/update' style='display: inline;'>");
+            out.printf("<input type='hidden' name='id' value='%d'/>", task.id());
+            out.println("<button type='submit' style='font-family: monospace; cursor: pointer; font-size: 1rem; color: #007D93; background-color: unset; border: unset;'>↻</button>");
+            out.println("</form>");
+            out.printf("<strong> %s </strong>: %s [%s]", task.title(),
                     task.description(),
                     task.completed() ? "Concluída" : "Pendente");
             out.println("<form method='post' action='/delete' style='display: inline; margin-left: auto;'>");

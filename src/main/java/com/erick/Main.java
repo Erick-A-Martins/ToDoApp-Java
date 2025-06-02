@@ -3,6 +3,7 @@ package com.erick;
 import com.erick.servlet.CreateTaskServlet;
 import com.erick.servlet.DeleteTaskServlet;
 import com.erick.servlet.ListTasksServlet;
+import com.erick.servlet.UpdateTaskServlet;
 
 import org.eclipse.jetty.server.Server;
 import org.eclipse.jetty.servlet.ServletContextHandler;
@@ -19,11 +20,12 @@ public class Main {
         context.addServlet(new ServletHolder(new ListTasksServlet()), "/tasks");
         context.addServlet(new ServletHolder(new CreateTaskServlet()), "/create");
         context.addServlet(new ServletHolder(new DeleteTaskServlet()), "/delete");
+        context.addServlet(new ServletHolder(new UpdateTaskServlet()), "/update");
 
         server.setHandler(context);
 
         server.start();
-        System.out.println("Servidor rodando em http://localhost:8080");
+        System.out.println("Servidor rodando em http://localhost:8080/tasks");
         server.join();
 
     }

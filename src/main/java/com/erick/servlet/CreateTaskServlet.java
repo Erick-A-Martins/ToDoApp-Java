@@ -22,7 +22,7 @@ public class CreateTaskServlet extends HttpServlet {
         res.setContentType("text/html");
         PrintWriter out = res.getWriter();
 
-        out.println("<html><body style='display: flex; justify-content:center;'>");
+        out.println("<html lang='pt-br'><body style='display: flex; justify-content:center;'>");
         out.println("<div style:'display:flex; flex-direction: column; align-items: center;'>");
         out.println("<div style='display:flex; align-items: center; gap: 2rem;'><a href='/tasks'><button style='font-family: monospace; cursor: pointer; font-size: 1rem; color: white; background-color: #007D93; border: unset;'><</button></a> <h1 style='font-family: monospace;'>Criar nova Tarefa</h1></div>");
         out.println("<form method='post' action='/create' style='font-family: monospace; font-size: 1rem;'>");
@@ -44,6 +44,10 @@ public class CreateTaskServlet extends HttpServlet {
         Task task = new Task(null, title, description, completed);
 
         try {
+            if(task.title().isEmpty()) {
+                res.sendRedirect("/create");
+                return;
+            }
             taskDao.addTask(task);
             res.sendRedirect("/tasks"); // Redireciona para a lista
 

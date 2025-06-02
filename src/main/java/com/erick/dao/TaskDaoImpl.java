@@ -37,7 +37,6 @@ public class TaskDaoImpl implements TaskDao {
 
         try(Statement stmt = connection.createStatement()) {
             stmt.execute(sql);
-            System.out.println("Tabela criada");
         }catch (SQLException e) {
             e.printStackTrace();
         }
@@ -132,4 +131,23 @@ public class TaskDaoImpl implements TaskDao {
         return tasks;
     }
 
+    @Override
+    public boolean updateTask(Task task) {
+        String sql = "UPDATE tasks SET title = ?, description = ?, completed = ? WHERE id = ?";
+
+        try (Connection conn = ConnectionFactory.getConnection();
+            PreparedStatement stmt = conn.prepareStatement(sql)) {
+
+            stmt.setString(1, task.title());
+            stmt.setString(2, task.description());
+            stmt.setBoolean(3, task.completed());
+            stmt.setInt(4, task.id());
+
+            return stmt.executeUpdate() > 0;
+
+        } catch(SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
 }
