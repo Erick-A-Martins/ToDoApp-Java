@@ -1,9 +1,10 @@
-package com.erick.pages;
+package com.erick.controller;
 
 import com.erick.model.Task;
 
 import com.erick.dao.TaskDao;
 import com.erick.dao.TaskDaoImpl;
+import com.erick.mvc.Page;
 
 import java.util.Map;
 import java.util.List;

@@ -1,9 +1,9 @@
-package com.erick.pages;
+package com.erick.controller;
 
 import com.erick.dao.TaskDao;
 import com.erick.dao.TaskDaoImpl;
+import com.erick.mvc.Page;
 
-import java.sql.SQLException;
 import java.util.Map;
 
 public class DeleteTaskPage implements Page {

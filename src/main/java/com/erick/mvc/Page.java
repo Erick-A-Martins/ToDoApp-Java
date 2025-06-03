@@ -1,4 +1,4 @@
-package com.erick.pages;
+package com.erick.mvc;
 
 import java.util.Map;
 

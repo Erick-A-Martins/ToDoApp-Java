@@ -1,15 +1,14 @@
-package com.erick;
+package com.erick.mvc;
 
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
-import com.erick.pages.Page;
-import com.erick.pages.ListTasksPage;
-import com.erick.pages.CreateTaskPage;
-import com.erick.pages.DeleteTaskPage;
-import com.erick.pages.UpdateTaskPage;
+import com.erick.controller.ListTasksPage;
+import com.erick.controller.CreateTaskPage;
+import com.erick.controller.DeleteTaskPage;
+import com.erick.controller.UpdateTaskPage;
 
 import java.io.IOException;
 
