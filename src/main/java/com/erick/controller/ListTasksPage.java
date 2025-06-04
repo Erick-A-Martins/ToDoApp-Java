@@ -5,10 +5,12 @@ import com.erick.model.Task;
 import com.erick.dao.TaskDao;
 import com.erick.dao.TaskDaoImpl;
 import com.erick.mvc.Page;
+import com.erick.mvc.Route;
 
 import java.util.Map;
 import java.util.List;
 
+@Route(route = "/tasks")
 public class ListTasksPage implements Page {
     private final TaskDao taskDao = new TaskDaoImpl();
 

@@ -1,48 +1,66 @@
 package com.erick.mvc;
 
-import jakarta.servlet.annotation.WebServlet;
+import io.github.classgraph.ScanResult;
+import io.github.classgraph.ClassGraph;
+import io.github.classgraph.ClassInfo;
+import io.github.classgraph.ClassInfoList;
+
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-
-import com.erick.controller.ListTasksPage;
-import com.erick.controller.CreateTaskPage;
-import com.erick.controller.DeleteTaskPage;
-import com.erick.controller.UpdateTaskPage;
+import jakarta.servlet.ServletException;
 
 import java.io.IOException;
 
 import java.util.HashMap;
 import java.util.Map;
 
-@WebServlet("/*")
-public class MiniServlet extends HttpServlet{
-    @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse res) throws IOException {
-        String path = req.getPathInfo();
-        Page page = null;
 
-        switch(path) {
-            case "/tasks" -> page = new ListTasksPage();
-            case "/create" -> page = new CreateTaskPage();
-            case "/delete" -> page = new DeleteTaskPage();
-            case "/update" -> page = new UpdateTaskPage();
-            case "/favicon.ico" -> {
-                res.setStatus(HttpServletResponse.SC_NO_CONTENT);
-                return;
+public class MiniServlet extends HttpServlet{
+
+    private final Map<String, Page> routes = new HashMap<>();
+
+    @Override
+    public void init() throws ServletException {
+        try(ScanResult scan = new ClassGraph()
+                .enableAllInfo()
+                .acceptPackages("com.erick.controller")
+                .scan()) {
+
+            ClassInfoList list = scan.getClassesWithAnnotation(Route.class.getName());
+
+            for(ClassInfo classInfo : list) {
+                Class<?> clazz = classInfo.loadClass();
+                Route routeAnnotation = clazz.getAnnotation(Route.class);
+
+                if(Page.class.isAssignableFrom(clazz)) {
+                    String path = routeAnnotation.route();
+                    Page page = (Page) clazz.getDeclaredConstructor().newInstance();
+                    routes.put(path, page);
+                }
             }
+
+        } catch(Exception e) {
+            throw new ServletException("Erro ao inicializar MiniServlet", e);
         }
+    }
+
+    @Override
+    protected void service(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
+        String path = req.getRequestURI();
+        Page page = routes.get(path);
 
         if(page == null) {
             res.setStatus(404);
             res.setContentType("text/html");
             res.getWriter().write("<h1>404 - Página não encontrada</h1>");
+            return;
         }
 
         Map<String, Object> parameters = new HashMap<>();
-        req.getParameterMap().forEach((k, v) -> {
-            if(v.length > 0)  {
-                parameters.put(k, v[0]);
+        req.getParameterMap().forEach((key, values) -> {
+            if(values.length > 0)  {
+                parameters.put(key, values[0]);
             }
         });
 
