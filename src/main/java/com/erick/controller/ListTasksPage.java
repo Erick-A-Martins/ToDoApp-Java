@@ -29,7 +29,7 @@ public class ListTasksPage implements Page {
                                         <button style='font-family: monospace; cursor: pointer; font-size: 1rem; color: white; background-color: #007D93; border: unset;'>+</button>
                                     </a>
                                 </div>
-                            <ul style=' padding: 0;'>
+                            <ul style='padding: 0; min-width: 48rem;'>
                 """);
 
         try {
@@ -41,18 +41,19 @@ public class ListTasksPage implements Page {
                             <form method='get' action='/update' style='display: inline;'>
                                 <input type='hidden' name='id' value='""" + task.id() + """
                                 '>""" + """
-                                <button type='submit' style='font-family: monospace; cursor: pointer; font-size: 1rem; color: #007D93; background-color: unset; border: unset;'>↻</button>
+                                <button type='submit' style='font-family: monospace; cursor: pointer; font-weight: bold; font-size: 1.5rem; color: #007D93; background-color: unset; border: unset;'>↻</button>
                             </form>
                             <strong>""" + task.title() + """
-                            </strong>:""" + task.description() + """
-                            [""" + (task.completed() ? "Concluída" : "Pendente") + """
+                            </strong>:&nbsp;""" + task.description() + """
+                            &nbsp;[""" + (task.completed() ? "Concluída" : "Pendente") + """
                             ]
                             <form method='get' action='/delete' style='display: inline; margin-left: auto;'>
                                 <input type='hidden' name='id' value='""" + task.id() + """
                                 '>""" + """
-                                <button type='submit' style='font-family: monospace; cursor: pointer; font-size: 1rem; color: #007D93; background-color: unset; border: unset;'>✖</button>
+                                <button type='submit' style='font-family: monospace; cursor: pointer; font-size: 1rem; color: white; background-color: #007D93; border: unset;'>✖</button>
                             </form>
                         </li>
+                        <hr>
                         """);
             }
         } catch(Exception e) {
