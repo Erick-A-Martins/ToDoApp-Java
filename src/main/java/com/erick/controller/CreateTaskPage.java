@@ -1,8 +1,9 @@
 package com.erick.controller;
 
 import com.erick.dao.TaskDao;
-import com.erick.dao.TaskDaoImpl;
+import com.erick.dao.TaskDaoJdbc;
 
+import com.erick.factory.BeanFactory;
 import com.erick.model.Task;
 import com.erick.mvc.Page;
 import com.erick.mvc.Route;
@@ -11,7 +12,7 @@ import java.util.Map;
 
 @Route(route = "/create")
 public class CreateTaskPage implements Page {
-    private final TaskDao taskDao = new TaskDaoImpl();
+    private final TaskDao taskDao = BeanFactory.createTaskDao();
 
     @Override
     public String render(Map<String, Object> parameters) {

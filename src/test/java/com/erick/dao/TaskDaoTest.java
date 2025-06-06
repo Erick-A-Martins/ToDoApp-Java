@@ -1,7 +1,7 @@
 package com.erick.dao;
 
-import com.erick.dao.TaskDao;
-import com.erick.dao.TaskDaoImpl;
+import com.erick.factory.BeanFactory;
+
 import com.erick.model.Task;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
@@ -15,7 +15,7 @@ public class TaskDaoTest {
 
     @BeforeEach
     void init() {
-        taskDao = new TaskDaoImpl();
+        taskDao = BeanFactory.createTaskDao();
     }
 
     @Test
@@ -51,8 +51,8 @@ public class TaskDaoTest {
         Task taskFromDb = taskDao.getTaskById(id);
 
         Assertions.assertNotNull(taskFromDb);
-        Assertions.assertEquals("buscar", taskFromDb.title());
-        Assertions.assertTrue(taskFromDb.completed());
+        Assertions.assertEquals("buscar", taskFromDb.getTitle());
+        Assertions.assertTrue(taskFromDb.isCompleted());
     }
 
     @Test
@@ -66,9 +66,9 @@ public class TaskDaoTest {
         Assertions.assertTrue(updatedTask);
 
         var taskFromDb = taskDao.getTaskById(id);
-        Assertions.assertEquals("atualizada", taskFromDb.title());
-        Assertions.assertEquals("alterado", taskFromDb.description());
-        Assertions.assertTrue(taskFromDb.completed());
+        Assertions.assertEquals("atualizada", taskFromDb.getTitle());
+        Assertions.assertEquals("alterado", taskFromDb.getDescription());
+        Assertions.assertTrue(taskFromDb.isCompleted());
     }
 
 }

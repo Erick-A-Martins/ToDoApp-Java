@@ -12,11 +12,11 @@ import java.sql.PreparedStatement;
 import java.sql.Statement;
 import java.sql.ResultSet;
 
-public class TaskDaoImpl implements TaskDao {
+public class TaskDaoJdbc implements TaskDao {
 
     private final Connection connection;
 
-    public TaskDaoImpl() {
+    public TaskDaoJdbc() {
         try {
             this.connection = ConnectionFactory.getConnection();
             createTableIfNotExists();
@@ -48,9 +48,9 @@ public class TaskDaoImpl implements TaskDao {
         try(Connection conn = ConnectionFactory.getConnection();
             PreparedStatement stmt = conn.prepareStatement(sql, PreparedStatement.RETURN_GENERATED_KEYS)) {
 
-            stmt.setString(1, task.title());
-            stmt.setString(2, task.description());
-            stmt.setBoolean(3, task.completed());
+            stmt.setString(1, task.getTitle());
+            stmt.setString(2, task.getDescription());
+            stmt.setBoolean(3, task.isCompleted());
 
             stmt.executeUpdate();
 
@@ -138,10 +138,10 @@ public class TaskDaoImpl implements TaskDao {
         try (Connection conn = ConnectionFactory.getConnection();
             PreparedStatement stmt = conn.prepareStatement(sql)) {
 
-            stmt.setString(1, task.title());
-            stmt.setString(2, task.description());
-            stmt.setBoolean(3, task.completed());
-            stmt.setInt(4, task.id());
+            stmt.setString(1, task.getTitle());
+            stmt.setString(2, task.getDescription());
+            stmt.setBoolean(3, task.isCompleted());
+            stmt.setInt(4, task.getId());
 
             return stmt.executeUpdate() > 0;
 
