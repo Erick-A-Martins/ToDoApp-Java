@@ -43,8 +43,8 @@ public class CreateTaskPage implements Page {
                             </div>
                             <form method='get' action='/create' style='font-family: monospace; font-size: 1rem;'>
                                 <input type='hidden' name='id' value='${task.id()}'>
-                                <label for='title'>Título:</label> <input type='text' name='title' id='title' style='width:100%; margin-bottom: 1rem;'><br>
-                                <label for='description'>Descrição:</label> <input type='text' name='description' id='description' style='width:100%; margin-bottom: 1rem;'><br>
+                                <label for='title'>Título:</label> <input type='text' name='title' id='title' style='width:100%; margin-bottom: 1rem;' required><br>
+                                <label for='description'>Descrição:</label> <input type='text' name='description' id='description' style='width:100%; margin-bottom: 1rem;' required><br>
                                 <label for='completed'>Concluída:</label> <input type='checkbox' name='completed' id='completed' style='width:100%; margin-bottom: 1rem;'><br>
                                 <input type='submit' value='Criar' style='padding: 1rem; color: white; background-color: #007D93; border: unset; width: 100%; cursor: pointer;'/>
                             </form>
