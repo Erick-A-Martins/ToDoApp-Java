@@ -94,6 +94,17 @@ public interface Page {
 - Criar e implementar TaskDaoHibernate (atualizar teste)
 - Criar classe BeanFactory com um factory method (https://refactoring.guru/pt-br/design-patterns/factory-method) estatico para criar a TaskDao
 
+### Fase 11: Primeiro contato com spring
+- Ler o overview: https://docs.spring.io/spring-framework/reference/overview.html
+- Iniciar manualmente: um application context do spring
+- Iniciar manualmente: o DispatcherServlet
+- Configurar thymeleaf
+- Reimplementar as telas usando SpringMVC
+- Separar em dois contextos
+  - /custom-mvc (MiniServlet)
+  - /spring-mvc (SpringMVC com DispatcherServlet)
+- Implementar controllers, etc.
+
 ## Tecnologias Utilizadas
 - Java 21
 - JDBC
