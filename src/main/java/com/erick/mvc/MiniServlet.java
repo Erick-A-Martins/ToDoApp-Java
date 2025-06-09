@@ -24,7 +24,7 @@ public class MiniServlet extends HttpServlet{
     public void init() throws ServletException {
         try(ScanResult scan = new ClassGraph()
                 .enableAllInfo()
-                .acceptPackages("com.erick.controller")
+                .acceptPackages("com.erick.mvc.pages")
                 .scan()) {
 
             ClassInfoList list = scan.getClassesWithAnnotation(Route.class.getName());
@@ -47,7 +47,7 @@ public class MiniServlet extends HttpServlet{
 
     @Override
     protected void service(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
-        String path = req.getRequestURI();
+        String path = req.getPathInfo();
         Page page = routes.get(path);
 
         if(page == null) {

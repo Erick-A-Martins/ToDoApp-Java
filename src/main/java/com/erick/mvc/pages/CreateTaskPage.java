@@ -1,7 +1,6 @@
-package com.erick.controller;
+package com.erick.mvc.pages;
 
 import com.erick.dao.TaskDao;
-import com.erick.dao.TaskDaoJdbc;
 
 import com.erick.factory.BeanFactory;
 import com.erick.model.Task;
@@ -25,7 +24,7 @@ public class CreateTaskPage implements Page {
             Task task = new Task(null, title, description, completed);
             try {
                 taskDao.addTask(task);
-                return "<meta http-equiv='refresh' content='0; URL=/tasks'>";
+                return "<meta http-equiv='refresh' content='0; URL=/custom-mvc/tasks'>";
             } catch(Exception e) {
                 return "<p>Erro ao criar tarefa: " + e.getMessage() + "</p>";
             }
@@ -36,12 +35,12 @@ public class CreateTaskPage implements Page {
                     <body style='display: flex; justify-content:center;'>
                         <div style='display:flex; flex-direction: column; align-items: center; max-width: 25rem;'>
                             <div style='display:flex; align-items: center; gap: 2rem;'>
-                                <a href='/tasks'>
+                                <a href='/custom-mvc/tasks'>
                                     <button style='font-family: monospace; cursor: pointer; font-size: 1rem; color: white; background-color: #007D93; border: unset;'><</button>
                                 </a>
                                 <h1 style='font-family: monospace;'>Criar nova Tarefa</h1>
                             </div>
-                            <form method='get' action='/create' style='font-family: monospace; font-size: 1rem;'>
+                            <form method='get' action='/custom-mvc/create' style='font-family: monospace; font-size: 1rem;'>
                                 <input type='hidden' name='id' value='${task.id()}'>
                                 <label for='title'>Título:</label> <input type='text' name='title' id='title' style='width:100%; margin-bottom: 1rem;' required><br>
                                 <label for='description'>Descrição:</label> <input type='text' name='description' id='description' style='width:100%; margin-bottom: 1rem;' required><br>
