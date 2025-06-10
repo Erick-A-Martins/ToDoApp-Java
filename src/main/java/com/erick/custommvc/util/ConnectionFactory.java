@@ -1,4 +1,4 @@
-package com.erick.util;
+package com.erick.custommvc.util;
 
 import java.sql.Connection;
 import java.sql.SQLException;

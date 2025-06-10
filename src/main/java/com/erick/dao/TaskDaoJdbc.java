@@ -1,7 +1,7 @@
 package com.erick.dao;
 
 import com.erick.model.Task;
-import com.erick.util.ConnectionFactory;
+import com.erick.custommvc.util.ConnectionFactory;
 
 import java.util.List;
 import java.util.ArrayList;

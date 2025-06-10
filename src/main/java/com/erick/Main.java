@@ -1,7 +1,7 @@
 package com.erick;
 
-import com.erick.mvc.MiniServlet;
-import com.erick.spring.SpringConfig;
+import com.erick.custommvc.MiniServlet;
+import com.erick.springmvc.SpringConfig;
 import com.erick.filters.AuthFilter;
 
 import org.eclipse.jetty.server.Server;

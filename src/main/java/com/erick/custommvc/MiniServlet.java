@@ -1,4 +1,4 @@
-package com.erick.mvc;
+package com.erick.custommvc;
 
 import io.github.classgraph.ScanResult;
 import io.github.classgraph.ClassGraph;
@@ -24,7 +24,7 @@ public class MiniServlet extends HttpServlet{
     public void init() throws ServletException {
         try(ScanResult scan = new ClassGraph()
                 .enableAllInfo()
-                .acceptPackages("com.erick.mvc.pages")
+                .acceptPackages("com.erick.custommvc.pages")
                 .scan()) {
 
             ClassInfoList list = scan.getClassesWithAnnotation(Route.class.getName());

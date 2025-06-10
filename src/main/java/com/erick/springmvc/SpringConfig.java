@@ -1,4 +1,4 @@
-package com.erick.spring;
+package com.erick.springmvc;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
@@ -12,7 +12,7 @@ import org.thymeleaf.spring6.view.ThymeleafViewResolver;
 
 @Configuration
 @EnableWebMvc
-@ComponentScan("com.erick.spring.controller")
+@ComponentScan("com.erick.springmvc.controller")
 public class SpringConfig {
 
     @Bean

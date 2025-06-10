@@ -1,4 +1,4 @@
-package com.erick.spring.controller;
+package com.erick.springmvc.controller;
 
 import com.erick.dao.TaskDao;
 import com.erick.factory.BeanFactory;
