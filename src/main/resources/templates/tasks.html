@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="pr-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Lista de Tarefas</title>
+</head>
+<body>
+    <h1>Lista de tarefas</h1>
+    <ul>
+        <li th:each="task : ${tasks}" th:number="${task.id}">
+            <strong th:text=" ${task.title}"></strong>: <span th:text="${task.description}"></span> [<span th:text="${task.completed} == true ? 'Concluída' : 'Pendente'"></span>]
+        </li>
+    </ul>
+</body>
+</html>

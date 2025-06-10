@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+  <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Criar tarefa</title>
+</head>
+<body>
+  <h1>Criar nova tarefa</h1>
+
+  <form th:action="@{/spring-mvc/create}" method="post">
+    <label for="title">Título:</label>
+    <input type="text" id="title" name="title" required> <br>
+
+    <label for="description">Descrição:</label>
+    <input type="text" id="description" name="description" required> <br>
+
+    <label for="completed">Concluída:</label>
+    <input type="checkbox" id="completed" name="completed"> <br>
+    <button type="submit">Criar</button>
+  </form>
+
+  <a th:href="@{/spring-mvc/tasks}">Voltar</a>
+</body>
+</html>
