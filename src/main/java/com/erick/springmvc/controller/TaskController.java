@@ -18,9 +18,14 @@ public class TaskController {
     TaskDao taskDao = BeanFactory.createTaskDao();
 
     @GetMapping("/tasks")
-    public String listTasks(Model model) throws SQLException {
-        model.addAttribute("tasks", taskDao.listAllTasks());
-        return "tasks";
+    public String listTasks(Model model) {
+        try {
+            model.addAttribute("tasks", taskDao.listAllTasks());
+            return "tasks";
+        } catch(SQLException e) {
+            e.printStackTrace();
+            return "error";
+        }
     }
 
     @GetMapping("/create")
@@ -64,6 +69,17 @@ public class TaskController {
 
         try {
             taskDao.updateTask(new Task(id, title, description, completed));
+            return "redirect:/spring-mvc/tasks";
+        } catch(SQLException e) {
+            e.printStackTrace();
+            return "error";
+        }
+    }
+
+    @GetMapping("/delete")
+    public String deleteTask(@RequestParam("id") Integer id) {
+        try {
+            taskDao.removeTaskById(id);
             return "redirect:/spring-mvc/tasks";
         } catch(SQLException e) {
             e.printStackTrace();
