@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Atualizar Tarefa</title>
+</head>
+<body>
+    <h1>Atualizar tarefa</h1>
+    <form th:action="@{/spring-mvc/update}" method="post">
+        <input type="hidden" name="id" th:value="${task.id}">
+
+        <label for="title">Título:</label>
+        <input type="text" id="title" name="title" th:value="${task.title}" required> <br>
+
+        <label for="description">Descrição:</label>
+        <input type="text" id="description" name="description" th:value="${task.description}" required> <br>
+
+        <label for="completed">Concluída:</label>
+        <input type="checkbox" id="completed" name="completed" th:checked="${task.completed}"> <br>
+        <button type="submit">Atualizar</button>
+    </form>
+</body>
+</html>

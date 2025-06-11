@@ -43,4 +43,32 @@ public class TaskController {
         }
 
     }
+
+    @GetMapping("/update")
+    public String showUpdateTask(@RequestParam("id") Integer id, Model model) {
+        try {
+            Task task = taskDao.getTaskById(id);
+            model.addAttribute("task", task);
+            return "update";
+        } catch(SQLException e) {
+            e.printStackTrace();
+            return "error";
+        }
+    }
+
+    @PostMapping("/update")
+    public String updateTask(@RequestParam("id") Integer id,
+                             @RequestParam("title") String title,
+                             @RequestParam("description") String description,
+                             @RequestParam(value = "completed", required = false) boolean completed) {
+
+        try {
+            taskDao.updateTask(new Task(id, title, description, completed));
+            return "redirect:/spring-mvc/tasks";
+        } catch(SQLException e) {
+            e.printStackTrace();
+            return "error";
+        }
+    }
+
 }

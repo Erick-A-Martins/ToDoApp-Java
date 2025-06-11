@@ -6,13 +6,40 @@
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Lista de Tarefas</title>
+
+    <style>
+        table, td, th {
+            border: 1px solid;
+            text-align: center;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+    </style>
 </head>
 <body>
     <h1>Lista de tarefas</h1>
-    <ul>
-        <li th:each="task : ${tasks}" th:number="${task.id}">
-            <strong th:text=" ${task.title}"></strong>: <span th:text="${task.description}"></span> [<span th:text="${task.completed} == true ? 'Concluída' : 'Pendente'"></span>]
-        </li>
-    </ul>
+    <a th:href="@{/spring-mvc/create}">Criar</a>
+
+    <table>
+        <tr>
+            <th>Titulo</th>
+            <th>Descrição</th>
+            <th>Estado</th>
+            <th>Opções</th>
+        </tr>
+        <tr th:each="task : ${tasks}">
+            <td th:text="${task.title}"></td>
+            <td th:text="${task.description}"></td>
+            <td th:text="${task.completed} ? 'Concluída' : 'Pendente'"></td>
+            <td>
+                <a th:href="@{'/spring-mvc/update'(id=${task.id})}">Editar</a>
+                <a href="">Deletar</a>
+            </td>
+        </tr>
+    </table>
+
 </body>
 </html>
