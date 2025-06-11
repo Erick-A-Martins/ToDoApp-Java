@@ -41,7 +41,7 @@ public class TaskController {
 
         try {
             taskDao.addTask(new Task(null, title, description, completed));
-            return "redirect:/spring-mvc/tasks";
+            return "redirect:/tasks";
         } catch(SQLException e) {
             e.printStackTrace();
             return "error";
@@ -69,7 +69,7 @@ public class TaskController {
 
         try {
             taskDao.updateTask(new Task(id, title, description, completed));
-            return "redirect:/spring-mvc/tasks";
+            return "redirect:/tasks";
         } catch(SQLException e) {
             e.printStackTrace();
             return "error";
@@ -80,7 +80,7 @@ public class TaskController {
     public String deleteTask(@RequestParam("id") Integer id) {
         try {
             taskDao.removeTaskById(id);
-            return "redirect:/spring-mvc/tasks";
+            return "redirect:/tasks";
         } catch(SQLException e) {
             e.printStackTrace();
             return "error";

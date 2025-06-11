@@ -6,20 +6,30 @@
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Atualizar Tarefa</title>
+    <link rel="stylesheet" th:href="@{/css/update.css}">
 </head>
 <body>
+
     <h1>Atualizar tarefa</h1>
-    <form th:action="@{/spring-mvc/update}" method="post">
+
+    <form th:action="@{/update}" method="post">
         <input type="hidden" name="id" th:value="${task.id}">
 
-        <label for="title">Título:</label>
-        <input type="text" id="title" name="title" th:value="${task.title}" required> <br>
+        <div class="input-wrapper">
+            <label for="title">Título:</label>
+            <input type="text" id="title" name="title" th:value="${task.title}" required>
+        </div>
 
-        <label for="description">Descrição:</label>
-        <input type="text" id="description" name="description" th:value="${task.description}" required> <br>
+        <div class="input-wrapper">
+            <label for="description">Descrição:</label>
+            <input type="text" id="description" name="description" th:value="${task.description}" required>
+        </div>
 
-        <label for="completed">Concluída:</label>
-        <input type="checkbox" id="completed" name="completed" th:checked="${task.completed}"> <br>
+        <div class="check-wrapper">
+            <label for="completed">Concluída:</label>
+            <input type="checkbox" id="completed" name="completed" th:checked="${task.completed}">
+        </div>
+
         <button type="submit">Atualizar</button>
     </form>
 </body>

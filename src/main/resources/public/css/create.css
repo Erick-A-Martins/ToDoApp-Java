@@ -1,0 +1,58 @@
+body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-family: "Roboto", sans-serif;
+}
+
+a {
+    text-decoration: none;
+}
+
+form {
+    min-width: 25rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+
+    & a {
+        border: 1px solid;
+        padding: .5rem 1rem;
+        background-color: #08b2d0;
+        width: 10%;
+        color: black;
+    }
+
+    & .input-wrapper {
+        & input, textarea {
+            all: unset;
+            width: 100%;
+            height: 100%;
+            border: 1px solid;
+            padding: .5rem;
+        }
+
+        & textarea {
+            overflow-wrap: break-word;
+            word-wrap: break-word;
+        }
+    }
+
+    & .check-wrapper {
+        width: 100%;
+    }
+
+    & .button-wrapper {
+        & button {
+            all: unset;
+            display: flex;
+            justify-content: center;
+            width: 100%;
+            padding: .5rem;
+            border: 1px solid;
+            cursor: pointer;
+            background-color: #08b2d0;
+        }
+    }
+
+}

@@ -37,7 +37,7 @@ public class Main {
         ServletRegistration.Dynamic springServlet = handler.getServletContext()
                         .addServlet("springDispatcher", new DispatcherServlet(context));
         springServlet.setLoadOnStartup(1);
-        springServlet.addMapping("/spring-mvc/*");
+        springServlet.addMapping("/*");
 
         server.setHandler(handler);
         server.start();

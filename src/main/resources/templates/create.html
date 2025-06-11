@@ -1,25 +1,41 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" lang="en">
 <head>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
   <title>Criar tarefa</title>
+  <link rel="stylesheet" th:href="@{/css/create.css}">
 </head>
 <body>
+
+
   <h1>Criar nova tarefa</h1>
 
-  <form th:action="@{/spring-mvc/create}" method="post">
-    <label for="title">Título:</label>
-    <input type="text" id="title" name="title" required> <br>
+  <form th:action="@{/create}" method="post">
+    <a th:href="@{/tasks}">Voltar</a>
 
-    <label for="description">Descrição:</label>
-    <input type="text" id="description" name="description" required> <br>
+    <div class="input-wrapper">
+      <label for="title">Título:</label>
+      <input type="text" id="title" name="title" required>
+    </div>
 
-    <label for="completed">Concluída:</label>
-    <input type="checkbox" id="completed" name="completed"> <br>
-    <button type="submit">Criar</button>
+    <div class="input-wrapper">
+      <label for="description">Descrição:</label>
+      <textarea id="description" name="description" cols="10" rows="5" required></textarea>
+    </div>
+
+    <div class="check-wrapper">
+      <label for="completed">Concluída:</label>
+      <input type="checkbox" id="completed" name="completed">
+    </div>
+
+    <div class="button-wrapper">
+      <button type="submit">Criar</button>
+    </div>
+
   </form>
-
-  <a th:href="@{/spring-mvc/tasks}">Voltar</a>
 </body>
 </html>
