@@ -29,13 +29,17 @@ public class Main {
         // Registrar a MiniServlet no caminho raiz do servidor (/custom-mvc/*)
         handler.addServlet(MiniServlet.class, "/custom-mvc/*");
 
-        // Registro do context (/spring-mvc) - Spring ApplicationContext
+        // criacao do contexto spring - Spring ApplicationContext
         AnnotationConfigWebApplicationContext context = new AnnotationConfigWebApplicationContext();
+        context.getEnvironment().getSystemProperties().put("spring.mvc.throw-exception-if-no-hanlder-found", "true"); // url invalida
         context.register(SpringConfig.class);
+
+        // Criação do DispatcherServlet
+        DispatcherServlet dispatcher = new DispatcherServlet(context);
 
         // DispatcherServlet em (/spring/mvc/*)
         ServletRegistration.Dynamic springServlet = handler.getServletContext()
-                        .addServlet("springDispatcher", new DispatcherServlet(context));
+                        .addServlet("springDispatcher", dispatcher);
         springServlet.setLoadOnStartup(1);
         springServlet.addMapping("/*");
 

@@ -24,7 +24,7 @@ public class TaskController {
             return "tasks";
         } catch(SQLException e) {
             e.printStackTrace();
-            return "error";
+            return "error404";
         }
     }
 
@@ -44,7 +44,7 @@ public class TaskController {
             return "redirect:/tasks";
         } catch(SQLException e) {
             e.printStackTrace();
-            return "error";
+            return "error404";
         }
 
     }
@@ -57,7 +57,7 @@ public class TaskController {
             return "update";
         } catch(SQLException e) {
             e.printStackTrace();
-            return "error";
+            return "error404";
         }
     }
 
@@ -72,7 +72,7 @@ public class TaskController {
             return "redirect:/tasks";
         } catch(SQLException e) {
             e.printStackTrace();
-            return "error";
+            return "error404";
         }
     }
 
@@ -83,7 +83,7 @@ public class TaskController {
             return "redirect:/tasks";
         } catch(SQLException e) {
             e.printStackTrace();
-            return "error";
+            return "error404";
         }
     }
 
