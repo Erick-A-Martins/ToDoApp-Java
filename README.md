@@ -105,6 +105,38 @@ public interface Page {
   - /spring-mvc (SpringMVC com DispatcherServlet)
 - Implementar controllers, etc.
 
+### Fase 12: Tudo é bean (💀)
+- Remover BeanFactory
+- Criar a TaskDAO no @Configuration do Spring com @Bean
+- Transformar a MiniServlet em um bean e injetar a TaskDAO
+- Remover ClassGraph, não será mais necessário
+- Transformar as pages em beans e injetar uma lista de Pages na MiniServlet
+- Criar uma home no `/` com links para as tasks em diferentes implementações (spring, servlet)
+
+### Fase 13: Spring Security (💀💀)
+- Remover AuthFilter
+- Configurar SpringSecurity
+- Habilitar login via form, o usuário e senha deve ser `teste`
+
+### Fase 14: Wicket (💀💀💀)
+- Instalar e configurar o Wicket no projeto (via maven)
+- O wicket é apenas um filtro
+- Recriar as tasks agora em Wicket, adicionar a nova implementação a home
+
+### Fase 15: Cobertura (💀💀)
+- Proibido usar geradores, aqui a ideia e vc aprender a fazer.
+- Instalar e configurar o jacoco no projeto (plugin do maven)
+- Cobertura deve ser superior a 60%, implementar os testes até chegar neste valor
+
+### Fase 16: React (💀💀💀💀)
+- Instalar e configurar o react no projeto (build via maven, usando frontend-maven-plugin)
+- Não deve rodar separado do projeto, deve subir apenas uma porta
+- Deve ter um script no package.json para fazer "watch" das alterações
+- Implementar a task com react, implementar controllers restfull para isso (no spring mvc)
+
+### Fase 17: Implantação (💀💀)
+- Implantar em alguma nuvem com plano gratis, pode ser aws, heroku, azure...
+
 ## Tecnologias Utilizadas
 - Java 21
 - JDBC
@@ -112,3 +144,9 @@ public interface Page {
 - Servlet API
 - Eclipse Jetty
 - HTML/CSS
+- ClassGraph
+- Hibernate
+- Spring
+- Thymeleaf
+- Wicket
+- React
