@@ -1,16 +1,25 @@
 package com.erick.custommvc.pages;
 
+import org.springframework.stereotype.Component;
+import org.springframework.beans.factory.annotation.Autowired;
+
 import com.erick.dao.TaskDao;
-import com.erick.factory.BeanFactory;
 import com.erick.model.Task;
 import com.erick.custommvc.Page;
-import com.erick.custommvc.Route;
+import com.erick.custommvc.annotation.Route;
 
 import java.util.Map;
 
+@Component
 @Route(route = "/update")
 public class UpdateTaskPage implements Page {
-    private final TaskDao taskDao = BeanFactory.createTaskDao();
+
+    private final TaskDao taskDao;
+
+    @Autowired
+    public UpdateTaskPage(TaskDao taskDao) {
+        this.taskDao = taskDao;
+    }
 
     @Override
     public String render(Map<String, Object> parameters) {

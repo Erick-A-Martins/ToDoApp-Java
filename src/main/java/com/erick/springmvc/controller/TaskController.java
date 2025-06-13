@@ -1,7 +1,6 @@
 package com.erick.springmvc.controller;
 
 import com.erick.dao.TaskDao;
-import com.erick.factory.BeanFactory;
 import com.erick.model.Task;
 
 import org.springframework.stereotype.Controller;
@@ -9,13 +8,19 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.ui.Model;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import java.sql.SQLException;
 
 @Controller
 public class TaskController {
 
-    TaskDao taskDao = BeanFactory.createTaskDao();
+    private final TaskDao taskDao;
+
+    @Autowired
+    public TaskController(TaskDao taskDao) {
+        this.taskDao = taskDao;
+    }
 
     @GetMapping("/tasks")
     public String listTasks(Model model) {

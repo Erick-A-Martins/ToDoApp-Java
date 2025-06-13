@@ -1,54 +1,48 @@
 package com.erick.custommvc;
 
-import io.github.classgraph.ScanResult;
-import io.github.classgraph.ClassGraph;
-import io.github.classgraph.ClassInfo;
-import io.github.classgraph.ClassInfoList;
+import com.erick.custommvc.annotation.Route;
+import org.springframework.stereotype.Component;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import jakarta.servlet.ServletException;
 
 import java.io.IOException;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.List;
 
-
+@Component
 public class MiniServlet extends HttpServlet{
 
-    private final Map<String, Page> routes = new HashMap<>();
+    private final Map<String, Page> routes = new HashMap<>();;
 
-    @Override
-    public void init() throws ServletException {
-        try(ScanResult scan = new ClassGraph()
-                .enableAllInfo()
-                .acceptPackages("com.erick.custommvc.pages")
-                .scan()) {
-
-            ClassInfoList list = scan.getClassesWithAnnotation(Route.class.getName());
-
-            for(ClassInfo classInfo : list) {
-                Class<?> clazz = classInfo.loadClass();
-                Route routeAnnotation = clazz.getAnnotation(Route.class);
-
-                if(Page.class.isAssignableFrom(clazz)) {
-                    String path = routeAnnotation.route();
-                    Page page = (Page) clazz.getDeclaredConstructor().newInstance();
-                    routes.put(path, page);
-                }
+    public MiniServlet(List<Page> pages) {
+        System.out.println("Iniciando MiniServlet com rotas: ");
+        for(Page page : pages) {
+            Route route = page.getClass().getAnnotation(Route.class);
+            if(route != null) {
+                routes.put(route.route(), page);
+                System.out.println("Registrando rota:" + route.route() + " -> " + page.getClass());
             }
-
-        } catch(Exception e) {
-            throw new ServletException("Erro ao inicializar MiniServlet", e);
         }
     }
 
     @Override
-    protected void service(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
-        String path = req.getPathInfo();
+    protected void service(HttpServletRequest req, HttpServletResponse res) throws IOException {
+        String uri = req.getRequestURI();
+        String contextPath = req.getContextPath();
+        String servletPath = req.getServletPath();
+
+        String path = uri.substring((contextPath + servletPath).length());
+        if(path.isEmpty()) path = "/";
+
         Page page = routes.get(path);
+
+        System.out.println("Requisiçao recebida em: " + path);
+        System.out.println("Rotas disponíveis: " + routes.keySet());
 
         if(page == null) {
             res.setStatus(404);
@@ -57,14 +51,8 @@ public class MiniServlet extends HttpServlet{
             return;
         }
 
-        Map<String, Object> parameters = new HashMap<>();
-        req.getParameterMap().forEach((key, values) -> {
-            if(values.length > 0)  {
-                parameters.put(key, values[0]);
-            }
-        });
 
-        String html = page.render(parameters);
+        String html = page.render(new HashMap<>());
         res.setContentType("text/html");
         res.getWriter().write(html);
     }

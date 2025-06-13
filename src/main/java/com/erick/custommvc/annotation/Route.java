@@ -1,4 +1,4 @@
-package com.erick.custommvc;
+package com.erick.custommvc.annotation;
 
 import java.lang.annotation.Target;
 import java.lang.annotation.Retention;

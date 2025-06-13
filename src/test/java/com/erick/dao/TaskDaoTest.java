@@ -1,7 +1,5 @@
 package com.erick.dao;
 
-import com.erick.factory.BeanFactory;
-
 import com.erick.model.Task;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
@@ -14,8 +12,8 @@ public class TaskDaoTest {
     TaskDao taskDao;
 
     @BeforeEach
-    void init() {
-        taskDao = BeanFactory.createTaskDao();
+    void init(TaskDao taskDao) {
+        taskDao = new TaskDaoHibernate();
     }
 
     @Test
