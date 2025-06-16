@@ -2,14 +2,21 @@ package com.erick;
 
 import com.erick.custommvc.MiniServlet;
 import com.erick.springmvc.SpringConfig;
+import com.erick.filters.SecurityConfig;
 
 import org.eclipse.jetty.server.Server;
 import org.eclipse.jetty.server.handler.ContextHandlerCollection;
 import org.eclipse.jetty.servlet.ServletContextHandler;
 import org.eclipse.jetty.servlet.ServletHolder;
+import org.eclipse.jetty.servlet.FilterHolder;
 
 import org.springframework.web.context.support.AnnotationConfigWebApplicationContext;
 import org.springframework.web.servlet.DispatcherServlet;
+import org.springframework.web.filter.DelegatingFilterProxy;
+
+import jakarta.servlet.DispatcherType;
+
+import java.util.EnumSet;
 
 public class Main {
     public static void main(String[] args) throws Exception{
@@ -17,25 +24,12 @@ public class Main {
         // Servidor Jetty --------------------
         Server server = new Server(8080);
 
-        // CONTEXTO HOME "/" -----------------
-        AnnotationConfigWebApplicationContext homeContext = new AnnotationConfigWebApplicationContext();
-        homeContext.register(SpringConfig.class);
-
-        ServletContextHandler homeHandler = new ServletContextHandler(ServletContextHandler.SESSIONS);
-        homeHandler.setContextPath("/");
-        homeContext.setServletContext(homeHandler.getServletContext());
-        homeContext.refresh();
-
-        DispatcherServlet homeServlet = new DispatcherServlet(homeContext);
-        homeHandler.addServlet(new ServletHolder(homeServlet), "/");
-
-
         // CONTEXTO SPRING MVC "/spring-mvc" -------------------------
         AnnotationConfigWebApplicationContext springContext = new AnnotationConfigWebApplicationContext();
-        springContext.register(SpringConfig.class);
+        springContext.register(SpringConfig.class, SecurityConfig.class);
 
         ServletContextHandler springHandler = new ServletContextHandler(ServletContextHandler.SESSIONS);
-        springHandler.setContextPath("/spring-mvc");
+        springHandler.setContextPath("/");
         springContext.setServletContext(springHandler.getServletContext());
         springContext.refresh();
 
@@ -51,7 +45,7 @@ public class Main {
 
         // REGISTRO DE HANDLERS -------------------------
         ContextHandlerCollection contexts = new ContextHandlerCollection();
-        contexts.addHandler(homeHandler);
+
         contexts.addHandler(springHandler);
         contexts.addHandler(customHandler);
 
