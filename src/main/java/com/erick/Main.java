@@ -27,8 +27,7 @@ public class Main {
         homeContext.refresh();
 
         DispatcherServlet homeServlet = new DispatcherServlet(homeContext);
-        ServletHolder homeHolder = new ServletHolder("homeServletDispatcher", homeServlet);
-        homeHandler.addServlet(homeHolder, "/");
+        homeHandler.addServlet(new ServletHolder(homeServlet), "/");
 
 
         // CONTEXTO SPRING MVC "/spring-mvc" -------------------------
