@@ -18,7 +18,9 @@ form {
     & a {
         border: 1px solid;
         padding: .5rem 1rem;
-        background-color: #08b2d0;
+        border: 1px solid #77deff;
+        background-color: #a0dbff;
+        border-radius: 2rem;
         width: 10%;
         color: black;
     }
@@ -30,6 +32,7 @@ form {
             height: 100%;
             border: 1px solid;
             padding: .5rem;
+            border-radius: .5rem;
         }
 
         & textarea {
@@ -51,7 +54,9 @@ form {
             padding: .5rem;
             border: 1px solid;
             cursor: pointer;
-            background-color: #08b2d0;
+            border: 1px solid #77deff;
+            background-color: #a0dbff;
+            border-radius: 2rem;
         }
     }
 

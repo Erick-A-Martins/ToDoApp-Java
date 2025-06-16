@@ -18,6 +18,7 @@ form {
             height: 100%;
             border: 1px solid;
             padding: .5rem;
+            border-radius: .5rem;
         }
 
         & textarea {
@@ -39,5 +40,8 @@ form {
         border: 1px solid;
         cursor: pointer;
         background-color: #08b2d0;
+        border: 1px solid #77deff;
+        background-color: #a0dbff;
+        border-radius: 2rem;
     }
 }
