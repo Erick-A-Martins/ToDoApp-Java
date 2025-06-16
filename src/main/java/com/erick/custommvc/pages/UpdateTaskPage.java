@@ -64,7 +64,7 @@ public class UpdateTaskPage implements Page {
                     """;
 
         } catch (Exception e) {
-            return "<p>Erro ao atualizar tarefa: " + e.getMessage() + "</p><a href='/tasks'>Voltar</a>";
+            return "<p>Erro ao atualizar tarefa: " + e.getMessage() + "</p><a href='/custom-mvc/tasks'>Voltar</a>";
         }
     }
 

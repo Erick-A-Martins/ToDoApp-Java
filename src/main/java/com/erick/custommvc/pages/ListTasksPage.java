@@ -12,7 +12,7 @@ import java.util.Map;
 import java.util.List;
 
 @Component
-@Route(route = "/custom-mvc/tasks")
+@Route(route = "/tasks")
 public class ListTasksPage implements Page {
 
     private final TaskDao taskDao;

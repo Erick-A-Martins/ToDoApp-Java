@@ -4,6 +4,7 @@ import com.erick.custommvc.MiniServlet;
 import com.erick.springmvc.SpringConfig;
 
 import org.eclipse.jetty.server.Server;
+import org.eclipse.jetty.server.handler.ContextHandlerCollection;
 import org.eclipse.jetty.servlet.ServletContextHandler;
 import org.eclipse.jetty.servlet.ServletHolder;
 import org.eclipse.jetty.server.handler.HandlerList;
@@ -15,31 +16,50 @@ import org.springframework.web.servlet.DispatcherServlet;
 public class Main {
     public static void main(String[] args) throws Exception{
 
-        // CONTEXTO SPRING MVC
+        // Servidor Jetty --------------------
+        Server server = new Server(8080);
+
+        // CONTEXTO HOME "/" -----------------
+        AnnotationConfigWebApplicationContext homeContext = new AnnotationConfigWebApplicationContext();
+        homeContext.register(SpringConfig.class);
+
+        ServletContextHandler homeHandler = new ServletContextHandler(ServletContextHandler.SESSIONS);
+        homeHandler.setContextPath("/");
+        homeContext.setServletContext(homeHandler.getServletContext());
+        homeContext.refresh();
+
+        DispatcherServlet homeServlet = new DispatcherServlet(homeContext);
+        ServletHolder homeHolder = new ServletHolder("homeServletDispatcher", homeServlet);
+        homeHandler.addServlet(homeHolder, "/");
+
+
+        // CONTEXTO SPRING MVC "/spring-mvc" -------------------------
         AnnotationConfigWebApplicationContext springContext = new AnnotationConfigWebApplicationContext();
         springContext.register(SpringConfig.class);
-        springContext.refresh();
 
         ServletContextHandler springHandler = new ServletContextHandler(ServletContextHandler.SESSIONS);
-        springHandler.setContextPath("/");
+        springHandler.setContextPath("/spring-mvc");
+        springContext.setServletContext(springHandler.getServletContext());
+        springContext.refresh();
 
         DispatcherServlet dispatcherServlet = new DispatcherServlet(springContext);
         springHandler.addServlet(new ServletHolder(dispatcherServlet), "/*");
 
-        // CONTEXTO CUSTOM MVC
+        // CONTEXTO CUSTOM MVC "/custom-mvc" -----------------------------
         ServletContextHandler customHandler = new ServletContextHandler(ServletContextHandler.SESSIONS);
         customHandler.setContextPath("/custom-mvc");
 
         MiniServlet miniServlet = springContext.getBean(MiniServlet.class);
         customHandler.addServlet(new ServletHolder(miniServlet), "/*");
 
+        // REGISTRO DE HANDLERS -------------------------
+        ContextHandlerCollection contexts = new ContextHandlerCollection();
+        contexts.addHandler(homeHandler);
+        contexts.addHandler(springHandler);
+        contexts.addHandler(customHandler);
 
-        HandlerList handlers = new HandlerList();
-        handlers.setHandlers(new Handler[]{springHandler, customHandler});
-
-        // SERVER
-        Server server = new Server(8080);
-        server.setHandler(handlers);
+        // INICIA SERVER
+        server.setHandler(contexts);
         server.start();
         server.join();
     }

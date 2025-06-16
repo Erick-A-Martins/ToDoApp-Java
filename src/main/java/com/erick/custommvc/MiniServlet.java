@@ -31,7 +31,16 @@ public class MiniServlet extends HttpServlet{
     }
 
     @Override
-    protected void service(HttpServletRequest req, HttpServletResponse res) throws IOException {
+    public void doGet(HttpServletRequest req, HttpServletResponse res) throws IOException {
+        handle(req, res);
+    }
+
+    @Override
+    public void doPost(HttpServletRequest req, HttpServletResponse res) throws IOException {
+        handle(req, res);
+    }
+
+    public void handle(HttpServletRequest req, HttpServletResponse res) throws IOException {
         String uri = req.getRequestURI();
         String contextPath = req.getContextPath();
         String servletPath = req.getServletPath();
@@ -51,8 +60,13 @@ public class MiniServlet extends HttpServlet{
             return;
         }
 
+        Map<String, Object> parameters = new HashMap<>();
 
-        String html = page.render(new HashMap<>());
+        for(String param : req.getParameterMap().keySet()) {
+            parameters.put(param, req.getParameter(param));
+        }
+
+        String html = page.render(parameters);
         res.setContentType("text/html");
         res.getWriter().write(html);
     }
