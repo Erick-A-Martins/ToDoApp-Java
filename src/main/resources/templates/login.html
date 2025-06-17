@@ -1,16 +1,30 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" lang="pt-br">
 <head>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <meta charset="UTF-8">
-    <title>Fazer Login</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" th:href="@{/css/login.css}">
+    <title>Login</title>
 </head>
 <body>
+    <h1>Login</h1>
     <form th:action="@{/login}" method="post">
-        <label for="user">Usuário</label>
-        <input type="text" id="user" name="user">
-        <label for="password">Senha</label>
-        <input type="password" id="password" name="password">
+        <div class="input-wrapper">
+            <label for="username">Usuário</label>
+            <input type="text" id="username" name="username">
+        </div>
+
+        <div class="input-wrapper">
+            <label for="password">Senha</label>
+            <input type="password" id="password" name="password">
+        </div>
         <button type="submit">Fazer login</button>
+
+        <div th:if="${param.error}">
+            <p>Login inválido!</p>
+        </div>
     </form>
 </body>
 </html>
