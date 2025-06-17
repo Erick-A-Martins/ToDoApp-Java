@@ -13,6 +13,11 @@ import org.springframework.web.context.support.AnnotationConfigWebApplicationCon
 import org.springframework.web.servlet.DispatcherServlet;
 import org.springframework.web.filter.DelegatingFilterProxy;
 
+import org.apache.wicket.protocol.http.WicketFilter;
+import com.erick.wicket.WicketApplication;
+import java.util.EnumSet;
+import jakarta.servlet.DispatcherType;
+
 public class Main {
     public static void main(String[] args) throws Exception{
 
@@ -38,6 +43,16 @@ public class Main {
 
         DispatcherServlet dispatcherServlet = new DispatcherServlet(springContext);
         handler.addServlet(new ServletHolder(dispatcherServlet), "/");
+
+
+        // WICKET
+        FilterHolder wicketFilter = new FilterHolder(new WicketFilter());
+        wicketFilter.setInitParameter("applicationClassName", WicketApplication.class.getName());
+        wicketFilter.setInitParameter(WicketFilter.FILTER_MAPPING_PARAM, "/wicket/*");
+        wicketFilter.setInitParameter("configuration", "development");
+        wicketFilter.setInitParameter("injectorContextAttribute", "org.springframework.web.context.WebApplicationContext.ROOT");
+
+        handler.addFilter(wicketFilter, "/wicket/*", EnumSet.of(DispatcherType.REQUEST, DispatcherType.FORWARD));
 
         // INICIA SERVER
         server.setHandler(handler);

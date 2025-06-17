@@ -89,6 +89,13 @@
             <artifactId>spring-security-config</artifactId>
             <version>6.5.0</version>
         </dependency>
+
+        <!-- https://mvnrepository.com/artifact/org.apache.wicket/wicket-core -->
+        <dependency>
+            <groupId>org.apache.wicket</groupId>
+            <artifactId>wicket-core</artifactId>
+            <version>10.5.0</version>
+        </dependency>
     </dependencies>
 
     <build>
