@@ -12,9 +12,10 @@ import org.eclipse.jetty.servlet.FilterHolder;
 import org.springframework.web.context.support.AnnotationConfigWebApplicationContext;
 import org.springframework.web.servlet.DispatcherServlet;
 import org.springframework.web.filter.DelegatingFilterProxy;
+import org.springframework.web.context.ContextLoaderListener;
 
 import org.apache.wicket.protocol.http.WicketFilter;
-import com.erick.wicket.WicketApplication;
+import com.erick.wicket.config.WicketApplication;
 import java.util.EnumSet;
 import jakarta.servlet.DispatcherType;
 
@@ -44,8 +45,9 @@ public class Main {
         DispatcherServlet dispatcherServlet = new DispatcherServlet(springContext);
         handler.addServlet(new ServletHolder(dispatcherServlet), "/");
 
+        // WICKET "/wicket" ----------------------------
+        handler.addEventListener(new ContextLoaderListener(springContext));
 
-        // WICKET
         FilterHolder wicketFilter = new FilterHolder(new WicketFilter());
         wicketFilter.setInitParameter("applicationClassName", WicketApplication.class.getName());
         wicketFilter.setInitParameter(WicketFilter.FILTER_MAPPING_PARAM, "/wicket/*");

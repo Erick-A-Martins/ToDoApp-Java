@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="pt-br" xmlns:wicket="http://wicket.apache.org">
+<head>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Lista de Tarefas - Wicket</title>
+    <link rel="stylesheet" href="/css/tasks.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+</head>
+<body>
+    <h1>Lista de tarefas - Wicket</h1>
+
+    <div class="container">
+        <div class="task-wrapper" wicket:id="taskList">
+            <div class="task-header">
+                <div>
+                    <span wicket:id="title"></span>
+                    <a href="">
+                        <img src="/images/delete-icon.png" alt="">
+                    </a>
+                </div>
+                <span wicket:id="description"></span>
+            </div>
+
+            <div class="task-footer">
+                <span wicket:id="completed"></span>
+                <a href="">
+                    <img src="/images/update-icon.png" alt="">
+                </a>
+            </div>
+        </div>
+
+        <div class="create-wrapper">
+            <a href="">
+                <img src="/images/create-icon.png" alt="">
+                Adicionar Tarefa
+            </a>
+        </div>
+    </div>
+
+</body>
+</html>
