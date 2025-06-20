@@ -1,5 +1,6 @@
 package com.erick.wicket.config;
 
+import com.erick.wicket.pages.EditTaskPage;
 import com.erick.wicket.pages.TasksPage;
 import com.erick.wicket.pages.CreateTaskPage;
 import com.erick.wicket.util.WicketDaoProvider;
@@ -19,5 +20,6 @@ public class WicketApplication extends WebApplication{
 
         mountPage("/tasks", TasksPage.class);
         mountPage("/create", CreateTaskPage.class);
+        mountPage("/update", EditTaskPage.class);
     }
 }

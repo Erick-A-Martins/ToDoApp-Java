@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="pt-br" xmlns:wicket="http://wicket.apache.org">
+<head>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <meta charset="UTF-8">
+  <title>Criar Tarefa - Wicket</title>
+  <link rel="stylesheet" href="/css/create.css">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+</head>
+<body>
+
+<h1 wicket:id="formTitle"></h1>
+
+<form wicket:id="taskForm">
+  <a href="">Voltar</a>
+
+  <div class="input-wrapper">
+    <label for="title">Título:</label>
+    <input type="text" id="title" name="title" wicket:id="title" required>
+  </div>
+
+  <div class="input-wrapper">
+    <label for="description">Descrição:</label>
+    <textarea name="description" id="description" cols="10" rows="5" wicket:id="description" required></textarea>
+  </div>
+
+  <div class="check-wrapper">
+    <label for="completed">Concluída:</label>
+    <input type="checkbox" id="completed" name="completed" wicket:id="completed">
+  </div>
+
+  <div class="button-wrapper">
+    <button type="submit">Atualizar</button>
+  </div>
+</form>
+</body>
+</html>
