@@ -2,6 +2,7 @@ package com.erick.wicket.pages;
 
 import com.erick.wicket.util.WicketDaoProvider;
 import org.apache.wicket.markup.html.WebPage;
+import org.apache.wicket.markup.html.link.Link;
 import org.apache.wicket.markup.html.list.ListItem;
 import org.apache.wicket.markup.html.list.ListView;
 import org.apache.wicket.markup.html.basic.Label;
@@ -24,6 +25,13 @@ public class TasksPage extends WebPage {
         } catch (SQLException e) {
             throw new RuntimeException("Erro ao listar tarefas", e);
         }
+
+        add(new Link<Void>("createLink") {
+           @Override
+           public void onClick() {
+               setResponsePage(CreateTaskPage.class);
+           }
+        });
 
         add(new ListView<Task>("taskList", tasks) {
 

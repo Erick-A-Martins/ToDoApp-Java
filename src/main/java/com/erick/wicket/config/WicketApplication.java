@@ -1,6 +1,7 @@
 package com.erick.wicket.config;
 
 import com.erick.wicket.pages.TasksPage;
+import com.erick.wicket.pages.CreateTaskPage;
 import com.erick.wicket.util.WicketDaoProvider;
 import org.apache.wicket.protocol.http.WebApplication;
 
@@ -17,5 +18,6 @@ public class WicketApplication extends WebApplication{
         getCspSettings().blocking().disabled();
 
         mountPage("/tasks", TasksPage.class);
+        mountPage("/create", CreateTaskPage.class);
     }
 }
