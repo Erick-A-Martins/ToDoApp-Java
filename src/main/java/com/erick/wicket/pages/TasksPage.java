@@ -1,6 +1,5 @@
 package com.erick.wicket.pages;
 
-import com.erick.wicket.util.WicketDaoProvider;
 import org.apache.wicket.markup.html.WebPage;
 import org.apache.wicket.markup.html.link.BookmarkablePageLink;
 import org.apache.wicket.markup.html.link.Link;
@@ -11,14 +10,17 @@ import org.apache.wicket.markup.html.basic.Label;
 import com.erick.dao.TaskDao;
 import com.erick.model.Task;
 import org.apache.wicket.request.mapper.parameter.PageParameters;
+import org.apache.wicket.spring.injection.annot.SpringBean;
 
 import java.sql.SQLException;
 import java.util.List;
 
 public class TasksPage extends WebPage {
 
+    @SpringBean
+    private transient TaskDao taskDao;
+
     public TasksPage() {
-        TaskDao taskDao = WicketDaoProvider.getTaskDao();
 
         List<Task> tasks;
 
@@ -48,6 +50,17 @@ public class TasksPage extends WebPage {
                 PageParameters params = new PageParameters();
                 params.add("id", task.getId());
                 item.add(new BookmarkablePageLink<Void>("editLink", EditTaskPage.class, params));
+                item.add(new Link<Void>("deleteLink") {
+                    @Override
+                    public void onClick() {
+                        try {
+                            taskDao.removeTaskById(task.getId());
+                        } catch(SQLException e) {
+                            throw new RuntimeException("Erro ao deletar tarefa " + e);
+                        }
+                        setResponsePage(TasksPage.class);
+                    }
+                });
             }
 
         });

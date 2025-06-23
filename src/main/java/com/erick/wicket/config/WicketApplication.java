@@ -3,10 +3,11 @@ package com.erick.wicket.config;
 import com.erick.wicket.pages.EditTaskPage;
 import com.erick.wicket.pages.TasksPage;
 import com.erick.wicket.pages.CreateTaskPage;
-import com.erick.wicket.util.WicketDaoProvider;
 import org.apache.wicket.protocol.http.WebApplication;
+import org.apache.wicket.spring.injection.annot.SpringComponentInjector;
 
 public class WicketApplication extends WebApplication{
+
     @Override
     public Class<TasksPage> getHomePage() {
         return TasksPage.class;
@@ -15,7 +16,11 @@ public class WicketApplication extends WebApplication{
     @Override
     public void init() {
         super.init();
-        WicketDaoProvider.init(getServletContext());
+
+        getComponentInstantiationListeners().add(
+                new SpringComponentInjector(this)
+        );
+
         getCspSettings().blocking().disabled();
 
         mountPage("/tasks", TasksPage.class);

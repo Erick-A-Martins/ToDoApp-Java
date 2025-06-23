@@ -2,7 +2,6 @@ package com.erick.wicket.pages;
 
 import com.erick.dao.TaskDao;
 import com.erick.model.Task;
-import com.erick.wicket.util.WicketDaoProvider;
 import org.apache.wicket.markup.html.WebPage;
 import org.apache.wicket.markup.html.basic.Label;
 import org.apache.wicket.markup.html.form.CheckBox;
@@ -12,11 +11,14 @@ import org.apache.wicket.markup.html.form.TextField;
 import org.apache.wicket.model.IModel;
 import org.apache.wicket.model.Model;
 import org.apache.wicket.request.mapper.parameter.PageParameters;
+import org.apache.wicket.spring.injection.annot.SpringBean;
 
 import java.sql.SQLException;
 
 public class EditTaskPage extends WebPage {
-    private transient TaskDao taskDao = WicketDaoProvider.getTaskDao();
+
+    @SpringBean
+    private transient TaskDao taskDao;
 
     private final IModel<String> titleModel = Model.of("");
     private final IModel<String> descriptionModel = Model.of("");
