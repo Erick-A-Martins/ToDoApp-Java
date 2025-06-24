@@ -4,7 +4,6 @@ import com.erick.model.Task;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
@@ -12,7 +11,7 @@ import org.hibernate.cfg.Configuration;
 import java.sql.SQLException;
 import java.util.List;
 
-public class TaskDaoTest {
+public class TaskDaoHibernateTest {
 
     TaskDao taskDao;
 
@@ -26,7 +25,7 @@ public class TaskDaoTest {
     void shouldAddTask() throws SQLException {
         var task = new Task(null, "teste", "teste", false);
         var id = taskDao.addTask(task);
-        assertNotNull(taskDao.getTaskById(id));
+        Assertions.assertNotNull(taskDao.getTaskById(id));
     }
 
     @Test
@@ -54,7 +53,7 @@ public class TaskDaoTest {
         var id = taskDao.addTask(task);
         Task taskFromDb = taskDao.getTaskById(id);
 
-        assertNotNull(taskFromDb);
+        Assertions.assertNotNull(taskFromDb);
         Assertions.assertEquals("buscar", taskFromDb.getTitle());
         Assertions.assertTrue(taskFromDb.isCompleted());
     }
