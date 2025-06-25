@@ -20,13 +20,25 @@ import org.apache.wicket.spring.injection.annot.SpringBean;
 public class CreateTaskPage extends WebPage {
 
     @SpringBean
-    private transient TaskDao taskDao;
+    private transient TaskDao taskDaoInjected;
+
+    private TaskDao taskDao;
 
     private IModel<String> titleModel = Model.of("");
     private IModel<String> descriptionModel = Model.of("");
     private IModel<Boolean> completedModel = Model.of(false);
 
     public CreateTaskPage() {
+        this.taskDao = taskDaoInjected;
+        initPage();
+    }
+
+    public CreateTaskPage(TaskDao taskDao) {
+        this.taskDao = taskDao;
+        initPage();
+    }
+
+    public void initPage() {
         add(new Label("formTitle", "Criar nova tarefa"));
 
         Form<Void> form = new Form<>("taskForm") {
@@ -41,7 +53,7 @@ public class CreateTaskPage extends WebPage {
                         completedModel.getObject());
 
                 try {
-                    taskDao.addTask(newTask);
+                    taskDaoInjected.addTask(newTask);
                 } catch(SQLException e) {
                     throw new RuntimeException("Erro ao criar nova tarefa." + e);
                 }
@@ -54,7 +66,5 @@ public class CreateTaskPage extends WebPage {
         form.add(new TextArea<>("description", descriptionModel));
         form.add(new CheckBox("completed", completedModel));
         add(form);
-
     }
-
 }

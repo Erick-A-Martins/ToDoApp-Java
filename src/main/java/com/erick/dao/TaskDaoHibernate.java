@@ -31,12 +31,9 @@ public class TaskDaoHibernate implements TaskDao{
         try(Session session = sessionFactory.openSession()) {
             Transaction tx = session.beginTransaction();
             Task task = session.find(Task.class, id);
-            if(task != null) {
-                session.remove(task);
-                tx.commit();
-                return true;
-            }
-            return false;
+            session.remove(task);
+            tx.commit();
+            return true;
         }
     }
 

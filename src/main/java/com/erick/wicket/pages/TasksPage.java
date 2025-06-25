@@ -18,10 +18,21 @@ import java.util.List;
 public class TasksPage extends WebPage {
 
     @SpringBean
-    private transient TaskDao taskDao;
+    private transient TaskDao taskDaoInjected;
+
+    private TaskDao taskDao;
 
     public TasksPage() {
+        this.taskDao = taskDaoInjected;
+        initPage();
+    }
 
+    public TasksPage(TaskDao taskDao) {
+        this.taskDao = taskDao;
+        initPage();
+    }
+
+    private void initPage() {
         List<Task> tasks;
 
         try {
@@ -31,10 +42,10 @@ public class TasksPage extends WebPage {
         }
 
         add(new Link<Void>("createLink") {
-           @Override
-           public void onClick() {
-               setResponsePage(CreateTaskPage.class);
-           }
+            @Override
+            public void onClick() {
+                setResponsePage(CreateTaskPage.class);
+            }
         });
 
         add(new ListView<Task>("taskList", tasks) {
@@ -45,7 +56,7 @@ public class TasksPage extends WebPage {
                 item.add(new Label("title", task.getTitle()));
                 item.add(new Label("description", task.getDescription()));
                 item.add(new Label("completed", () ->
-                    task.isCompleted() ? "Concluída" : "Pendente"
+                        task.isCompleted() ? "Concluída" : "Pendente"
                 ));
                 PageParameters params = new PageParameters();
                 params.add("id", task.getId());
@@ -65,4 +76,5 @@ public class TasksPage extends WebPage {
 
         });
     }
+
 }
