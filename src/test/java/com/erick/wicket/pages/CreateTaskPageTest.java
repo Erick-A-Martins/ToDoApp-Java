@@ -1,4 +1,4 @@
-package wicket.pages;
+package com.erick.wicket.pages;
 
 import com.erick.wicket.pages.CreateTaskPage;
 import org.junit.jupiter.api.Test;

@@ -1,4 +1,4 @@
-package wicket.pages;
+package com.erick.wicket.pages;
 
 import com.erick.dao.TaskDao;
 import com.erick.wicket.pages.TasksPage;

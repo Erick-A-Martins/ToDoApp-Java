@@ -2,6 +2,7 @@ package com.erick.wicket.pages;
 
 import com.erick.dao.TaskDao;
 import com.erick.model.Task;
+import org.apache.wicket.Page;
 import org.apache.wicket.markup.html.WebPage;
 import org.apache.wicket.markup.html.basic.Label;
 import org.apache.wicket.markup.html.form.CheckBox;
@@ -27,6 +28,14 @@ public class EditTaskPage extends WebPage {
     private transient Task task;
 
     public EditTaskPage(PageParameters params) {
+        initPage(params, taskDao);
+    }
+
+    public EditTaskPage(PageParameters params, TaskDao taskDao) {
+        initPage(params, taskDao);
+    }
+
+    private void initPage(PageParameters params, TaskDao taskDao) {
         taskId = params.get("id").toOptionalInteger();
 
         if (taskId == null) {
@@ -67,6 +76,5 @@ public class EditTaskPage extends WebPage {
         form.add(new TextArea<>("description", descriptionModel));
         form.add(new CheckBox("completed", completedModel));
         add(form);
-
     }
 }
