@@ -2,23 +2,18 @@ package com.erick.wicket.pages;
 
 import com.erick.dao.TaskDao;
 import com.erick.model.Task;
-import com.erick.wicket.pages.EditTaskPage;
 
-import com.erick.wicket.pages.TasksPage;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.BeforeEach;
 
-import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.Mockito.mock;
 import org.apache.wicket.util.tester.WicketTester;
-import org.apache.wicket.util.tester.FormTester;
-
-import java.sql.SQLException;
+import org.apache.wicket.request.mapper.parameter.PageParameters;
 
 import static org.mockito.Mockito.when;
-
-import org.apache.wicket.request.mapper.parameter.PageParameters;
+import static org.mockito.Mockito.mock;
 import org.mockito.Mockito;
+
+import java.sql.SQLException;
 
 public class EditTaskPageTest {
 

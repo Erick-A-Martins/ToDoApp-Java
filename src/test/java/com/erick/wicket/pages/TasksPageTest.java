@@ -1,33 +1,37 @@
 package com.erick.wicket.pages;
 
 import com.erick.dao.TaskDao;
-import com.erick.wicket.pages.TasksPage;
-
-import static org.mockito.Mockito.mock;
-
-import org.apache.wicket.util.tester.WicketTester;
-import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
-
-import java.sql.SQLException;
-
-import java.util.List;
 import com.erick.model.Task;
 
+import org.apache.wicket.util.tester.WicketTester;
+
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.BeforeEach;
+
 import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.mock;
+
+import java.sql.SQLException;
+import java.util.List;
 
 public class TasksPageTest {
 
+    private WicketTester tester;
+    private TaskDao taskDaoMock;
+
+    @BeforeEach
+    public void setUp() {
+        tester = new WicketTester();
+        taskDaoMock = mock(TaskDao.class);
+    }
+
     @Test
     public void renderPage() throws SQLException {
-        TaskDao taskDaoMock = mock(TaskDao.class);
 
         when(taskDaoMock.listAllTasks()).thenReturn(List.of(
                 new Task(1, "teste", "teste", false)
         ));
 
-        WicketTester tester = new WicketTester();
         tester.startPage(new TasksPage(taskDaoMock));
         tester.assertRenderedPage(TasksPage.class);
 
