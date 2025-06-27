@@ -11,6 +11,7 @@ import org.apache.wicket.request.mapper.parameter.PageParameters;
 
 import static org.mockito.Mockito.when;
 import static org.mockito.Mockito.mock;
+import static org.mockito.ArgumentMatchers.any;
 import org.mockito.Mockito;
 
 import java.sql.SQLException;

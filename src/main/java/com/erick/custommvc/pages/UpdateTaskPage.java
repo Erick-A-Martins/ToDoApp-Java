@@ -24,7 +24,7 @@ public class UpdateTaskPage implements Page {
     @Override
     public String render(Map<String, Object> parameters) {
         try {
-            Integer id = Integer.parseInt((String) parameters.get("id"));
+            Integer id = Integer.parseInt(parameters.get("id").toString());
 
             if(parameters.containsKey("title")) {
                 String title = (String) parameters.get("title");
