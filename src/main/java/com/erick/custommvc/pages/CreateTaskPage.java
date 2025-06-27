@@ -25,8 +25,8 @@ public class CreateTaskPage implements Page {
     public String render(Map<String, Object> parameters) {
 
         if(parameters.containsKey("title")) {
-            String title = (String) parameters.get("title");
-            String description = (String) parameters.get("description");
+            String title = parameters.get("title").toString();
+            String description = parameters.get("description").toString();
             boolean completed = parameters.containsKey("completed");
 
             Task task = new Task(null, title, description, completed);

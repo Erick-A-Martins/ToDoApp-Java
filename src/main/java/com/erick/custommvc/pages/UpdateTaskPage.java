@@ -27,8 +27,8 @@ public class UpdateTaskPage implements Page {
             Integer id = Integer.parseInt(parameters.get("id").toString());
 
             if(parameters.containsKey("title")) {
-                String title = (String) parameters.get("title");
-                String description = (String) parameters.get("description");
+                String title = parameters.get("title").toString();
+                String description = parameters.get("description").toString();
                 boolean completed = parameters.containsKey("completed");
 
                 Task updatedTask = new Task(id, title, description, completed);
