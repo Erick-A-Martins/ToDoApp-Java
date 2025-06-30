@@ -17,7 +17,7 @@ import java.util.List;
 @Component
 public class MiniServlet extends HttpServlet{
 
-    private final Map<String, Page> routes = new HashMap<>();;
+    private final Map<String, Page> routes = new HashMap<>();
 
     public MiniServlet(List<Page> pages) {
         System.out.println("Iniciando MiniServlet com rotas: ");
