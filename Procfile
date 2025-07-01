@@ -1,0 +1,1 @@
+web: java -jar target/todoapp-java-1.0-SNAPSHOT.jar
