@@ -63,7 +63,10 @@ public class Main {
     }
 
     public static void main(String[] args) throws Exception{
-        Server server = createServer(8080);
+        String herokuPort = System.getenv("PORT");
+        int port = (herokuPort != null) ? Integer.parseInt(herokuPort) : 8080;
+
+        Server server = createServer(port);
         server.start();
         server.join();
     }
